@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="header-left">
+    <span class="logo">Angular Project</span>
+  </div>
+
+  <nav class="header-right">
+    <button
+      routerLink="/home"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-btn"
+    >
+      Home
+    </button>
+
+    <button
+      routerLink="/about"
+      routerLinkActive="active"
+      class="nav-btn"
+    >
+      About
+    </button>
+  </nav>
+</header>
