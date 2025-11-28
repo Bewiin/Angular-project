@@ -1,22 +1,36 @@
-<h2>Liste des tâches</h2>
+<div class="task-page">
+  <header class="task-header">
+    <h2>Liste des tâches</h2>
+    <p class="task-subtitle">
+      Gère tes tâches ici.
+    </p>
+  </header>
 
-@if (tasks$ | async; as tasks){
-  <ul>
-    @for (t of tasks; track t.id) {
-      <li>
-        {{t.title}}
-      </li>
+  <section class="task-list-wrapper">
+    @if (tasks$ | async; as tasks) {
+
+      @if (tasks.length > 0) {
+        <ul class="task-list">
+          @for (t of tasks; track t.id) {
+            <li class="task-item">
+              <span class="task-bullet"></span>
+              <span class="task-title">{{ t.title }}</span>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty-state">
+          Aucune tâche pour le moment. Ajoute-en une !
+        </p>
+      }
+
+    } @else {
+      <p class="loading">Chargement des tâches ...</p>
     }
-  </ul>
-} @else {
-  <p>Chargement des tâches ...</p>
-}
+  </section>
 
-<br>
-
-<h3>Actions</h3>
-
-<button (click)="addTask('Nouvelle tâche')">
-  Ajout d'une nouvelle tache
-
-</button>
+  <!-- Bouton flottant pour ajouter une tâche -->
+  <button class="fab" (click)="addTask('Nouvelle tâche')">
+    +
+  </button>
+</div>

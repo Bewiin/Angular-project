@@ -1,0 +1,150 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #111827 0, #020617 55%, #000000 100%);
+  color: #f9fafb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Conteneur principal */
+.task-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem; /* marge bas pour laisser la place au FAB */
+}
+
+/* Header / titre */
+.task-header {
+  margin-bottom: 1.5rem;
+}
+
+.task-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+
+.task-subtitle {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Bloc liste */
+.task-list-wrapper {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 0.9rem;
+  padding: 1rem 1rem 0.5rem;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Liste */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.4rem;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+  transition:
+    background 0.18s ease,
+    transform 0.08s ease,
+    border-color 0.18s ease;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-item:hover {
+  background: rgba(31, 41, 55, 0.9);
+  transform: translateX(2px);
+  border-color: rgba(239, 68, 68, 0.7);
+}
+
+/* Pastille rouge */
+.task-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.9);
+}
+
+/* Titre de tâche */
+.task-title {
+  font-size: 0.95rem;
+}
+
+/* États "vide" / "chargement" */
+.empty-state,
+.loading {
+  margin: 0.4rem 0 0.8rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Bouton flottant (FAB) */
+.fab {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #f9fafb;
+  font-size: 1.7rem;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.8),
+    0 0 18px rgba(248, 113, 113, 0.9);
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.fab:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 22px 40px rgba(0, 0, 0, 0.9),
+    0 0 22px rgba(248, 113, 113, 1);
+  background: linear-gradient(135deg, #f97373, #b91c1c);
+}
+
+.fab:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.8),
+    0 0 14px rgba(248, 113, 113, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .task-page {
+    padding: 1.5rem 1rem 5rem;
+  }
+
+  .task-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .fab {
+    right: 1.2rem;
+    bottom: 1.2rem;
+  }
+}
