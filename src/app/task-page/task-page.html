@@ -1,36 +1,45 @@
-<div class="task-page">
-  <header class="task-header">
-    <h2>Liste des tâches</h2>
-    <p class="task-subtitle">
-      Gère tes tâches ici.
-    </p>
-  </header>
+<h2>Liste des tâches</h2>
 
-  <section class="task-list-wrapper">
-    @if (tasks$ | async; as tasks) {
+@if (tasks$ | async; as tasks) {
 
-      @if (tasks.length > 0) {
-        <ul class="task-list">
-          @for (t of tasks; track t.id) {
-            <li class="task-item">
-              <span class="task-bullet"></span>
-              <span class="task-title">{{ t.title }}</span>
-            </li>
+  @if (tasks.length > 0) {
+    <ul class="task-list">
+      @for (t of tasks; track t.id) {
+        <li class="task-item" (click)="startEdit(t)">
+
+          @if (editingId === t.id) {
+            <input
+              class="task-input"
+              [(ngModel)]="editingTitle"
+              autofocus
+              (click)="$event.stopPropagation()"
+              (blur)="saveEdit()"
+              (keydown.enter)="saveEdit()"
+              (keydown.escape)="cancelEdit()"
+            />
+          } @else {
+            <span class="task-bullet"></span>
+            <span class="task-title">{{ t.title }}</span>
           }
-        </ul>
-      } @else {
-        <p class="empty-state">
-          Aucune tâche pour le moment. Ajoute-en une !
-        </p>
+
+        </li>
       }
+    </ul>
+  } @else {
+    <p class="empty-state">
+      Aucune tâche pour le moment.
+    </p>
+  }
 
-    } @else {
-      <p class="loading">Chargement des tâches ...</p>
-    }
-  </section>
+} @else {
+  <p class="loading">Chargement des tâches ...</p>
+}
 
-  <!-- Bouton flottant pour ajouter une tâche -->
-  <button class="fab" (click)="addTask('Nouvelle tâche')">
-    +
-  </button>
-</div>
+<br>
+
+<h3>Actions</h3>
+
+<button class="fab" (click)="addTask('Nouvelle tâche')">
+  +
+</button>
+
