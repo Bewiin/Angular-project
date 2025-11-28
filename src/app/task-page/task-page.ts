@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task, TaskItem } from '../core/services/task';
@@ -14,6 +14,13 @@ import { Task, TaskItem } from '../core/services/task';
   styleUrl: './task-page.css',
 })
 export class TaskPage {
+  isLoading = signal(true);
+  ngOnInit(): void {
+    // Simulation de chargement à chaque refresh
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 1000); // 1 seconde
+  }
 
 
   tasks$!: ReturnType<Task['getTasks']>;

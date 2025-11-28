@@ -1,38 +1,49 @@
 <h2>Liste des tâches</h2>
 
-@if (tasks$ | async; as tasks) {
+@if (isLoading()) {
 
-  @if (tasks.length > 0) {
-    <ul class="task-list">
-      @for (t of tasks; track t.id) {
-        <li class="task-item" (click)="startEdit(t)">
-
-          @if (editingId === t.id) {
-            <input
-              class="task-input"
-              [(ngModel)]="editingTitle"
-              autofocus
-              (click)="$event.stopPropagation()"
-              (blur)="saveEdit()"
-              (keydown.enter)="saveEdit()"
-              (keydown.escape)="cancelEdit()"
-            />
-          } @else {
-            <span class="task-bullet"></span>
-            <span class="task-title">{{ t.title }}</span>
-          }
-
-        </li>
-      }
-    </ul>
-  } @else {
-    <p class="empty-state">
-      Aucune tâche pour le moment.
-    </p>
-  }
+  <div class="loading-bar">
+    <div class="loading-bar-inner"></div>
+  </div>
+  <p class="loading">Chargement des tâches ...</p>
 
 } @else {
-  <p class="loading">Chargement des tâches ...</p>
+
+  @if (tasks$ | async; as tasks) {
+
+    @if (tasks.length > 0) {
+      <ul class="task-list">
+        @for (t of tasks; track t.id) {
+          <li class="task-item" (click)="startEdit(t)">
+
+            @if (editingId === t.id) {
+              <input
+                class="task-input"
+                [(ngModel)]="editingTitle"
+                autofocus
+                (click)="$event.stopPropagation()"
+                (blur)="saveEdit()"
+                (keydown.enter)="saveEdit()"
+                (keydown.escape)="cancelEdit()"
+              />
+            } @else {
+              <span class="task-bullet"></span>
+              <span class="task-title">{{ t.title }}</span>
+            }
+
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty-state">
+        Aucune tâche pour le moment.
+      </p>
+    }
+
+  } @else {
+    <p class="loading">Chargement des tâches ...</p>
+  }
+
 }
 
 <br>
@@ -42,4 +53,3 @@
 <button class="fab" (click)="addTask('Nouvelle tâche')">
   +
 </button>
-
